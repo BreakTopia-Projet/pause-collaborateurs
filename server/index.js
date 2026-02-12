@@ -4,6 +4,7 @@ import cors from 'cors';
 import { Server } from 'socket.io';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import fs from 'fs';
 import { PORT, PAUSE_PROLONGEE_MINUTES } from './config.js';
 import { verifyToken } from './auth.js';
 import db from './db.js';
@@ -23,13 +24,33 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const clientDist = join(__dirname, '..', 'client', 'dist');
 
+// ── Diagnostic au démarrage : vérifier la présence du build frontend ──
+const distExists = fs.existsSync(clientDist);
+const indexExists = fs.existsSync(join(clientDist, 'index.html'));
+console.log(`[startup] clientDist = ${clientDist}`);
+console.log(`[startup] dist exists = ${distExists}, index.html exists = ${indexExists}`);
+if (!distExists) {
+  console.warn('[startup] WARNING: client/dist not found. Run "npm run build" first.');
+}
+
 const app = express();
 const httpServer = createServer(app);
 
-const ALLOWED_ORIGINS = [
+const DEFAULT_ORIGINS = [
   'http://localhost:5173', 'http://127.0.0.1:5173',
   'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176',
+  'https://test.breaktopia.io',
+  'https://breaktopia.io',
 ];
+
+// Allow overriding via env: ALLOWED_ORIGINS=https://foo.com,https://bar.com
+const envOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()).filter(Boolean)
+  : [];
+
+const ALLOWED_ORIGINS = envOrigins.length > 0
+  ? [...DEFAULT_ORIGINS, ...envOrigins]
+  : DEFAULT_ORIGINS;
 
 const io = new Server(httpServer, {
   cors: { origin: ALLOWED_ORIGINS },
@@ -135,6 +156,21 @@ initTransport();
 
 // Start the presence checker (grace-based auto-logout)
 startPresenceChecker(io);
+
+// ── Debug endpoint (protected) ──
+if (process.env.DEBUG_DIST === 'true') {
+  app.get('/__debug/dist', (req, res) => {
+    const distExistsNow = fs.existsSync(clientDist);
+    const indexExistsNow = fs.existsSync(join(clientDist, 'index.html'));
+    const files = distExistsNow ? fs.readdirSync(clientDist).slice(0, 50) : [];
+    res.json({
+      clientDist,
+      distExists: distExistsNow,
+      indexExists: indexExistsNow,
+      files
+    });
+  });
+}
 
 // ── Serve React/Vite frontend in production ──
 app.use(express.static(clientDist));
