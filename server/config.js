@@ -20,3 +20,10 @@ export const SMTP_USER = process.env.SMTP_USER || '';
 export const SMTP_PASS = process.env.SMTP_PASS || '';
 export const MAIL_FROM = process.env.MAIL_FROM || 'Breaktopia <contact@breaktopia.io>';
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
+/**
+ * Token d'accès aux endpoints de diagnostic (/__debug/*).
+ * À définir via la variable d'environnement DEBUG_TOKEN ou directement ici.
+ * Si vide, les endpoints de debug sont désactivés (renvoient 404).
+ */
+export const DEBUG_TOKEN = process.env.DEBUG_TOKEN || '';

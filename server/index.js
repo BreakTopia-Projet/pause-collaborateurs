@@ -5,7 +5,7 @@ import { Server } from 'socket.io';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
-import { PORT, PAUSE_PROLONGEE_MINUTES } from './config.js';
+import { PORT, PAUSE_PROLONGEE_MINUTES, DEBUG_TOKEN } from './config.js';
 import { verifyToken } from './auth.js';
 import db from './db.js';
 import { setIo } from './socketEmitter.js';
@@ -157,20 +157,31 @@ initTransport();
 // Start the presence checker (grace-based auto-logout)
 startPresenceChecker(io);
 
-// ── Debug endpoint (protected) ──
-if (process.env.DEBUG_DIST === 'true') {
-  app.get('/__debug/dist', (req, res) => {
-    const distExistsNow = fs.existsSync(clientDist);
-    const indexExistsNow = fs.existsSync(join(clientDist, 'index.html'));
-    const files = distExistsNow ? fs.readdirSync(clientDist).slice(0, 50) : [];
-    res.json({
-      clientDist,
-      distExists: distExistsNow,
-      indexExists: indexExistsNow,
-      files
-    });
+// ── Debug endpoints (token-protected, returns 404 if token missing/wrong) ──
+const BUILD_TIME = new Date().toISOString();
+
+const debugAuth = (req, res, next) => {
+  if (!DEBUG_TOKEN || req.query.token !== DEBUG_TOKEN) {
+    return res.status(404).end();
+  }
+  next();
+};
+
+app.get('/__debug/dist', debugAuth, (req, res) => {
+  const distExistsNow = fs.existsSync(clientDist);
+  const indexExistsNow = fs.existsSync(join(clientDist, 'index.html'));
+  const files = distExistsNow ? fs.readdirSync(clientDist).slice(0, 20) : [];
+  res.json({
+    clientDist,
+    distExists: distExistsNow,
+    indexExists: indexExistsNow,
+    files
   });
-}
+});
+
+app.get('/__debug/version', debugAuth, (req, res) => {
+  res.json({ commit: 'unknown', buildTime: BUILD_TIME });
+});
 
 // ── Serve React/Vite frontend in production ──
 app.use(express.static(clientDist));
