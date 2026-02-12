@@ -2,6 +2,8 @@ import { createServer } from 'http';
 import express from 'express';
 import cors from 'cors';
 import { Server } from 'socket.io';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { PORT, PAUSE_PROLONGEE_MINUTES } from './config.js';
 import { verifyToken } from './auth.js';
 import db from './db.js';
@@ -16,6 +18,10 @@ import approvalsRoutes from './routes/approvals.js';
 import { startPresenceChecker, handleSocketDisconnect } from './presence.js';
 import { initTransport } from './services/mailService.js';
 import { notifyPendingCount } from './socketEmitter.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const clientDist = join(__dirname, '..', 'client', 'dist');
 
 const app = express();
 const httpServer = createServer(app);
@@ -129,6 +135,12 @@ initTransport();
 
 // Start the presence checker (grace-based auto-logout)
 startPresenceChecker(io);
+
+// ── Serve React/Vite frontend in production ──
+app.use(express.static(clientDist));
+app.get('*', (req, res) => {
+  res.sendFile(join(clientDist, 'index.html'));
+});
 
 httpServer.listen(PORT, "0.0.0.0", () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
