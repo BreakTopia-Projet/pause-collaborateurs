@@ -130,6 +130,6 @@ initTransport();
 // Start the presence checker (grace-based auto-logout)
 startPresenceChecker(io);
 
-httpServer.listen(PORT, () => {
-  console.log(`Serveur sur http://localhost:${PORT}`);
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
 });
