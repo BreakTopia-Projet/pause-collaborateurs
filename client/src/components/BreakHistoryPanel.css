@@ -1,0 +1,193 @@
+/* ── Break History Panel ── */
+.bh-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Controls bar */
+.bh-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.bh-view-toggle {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bh-view-btn {
+  padding: 0.4rem 0.9rem;
+  border: none;
+  background: #fff;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.bh-view-btn:not(:last-child) { border-right: 1px solid #d1d5db; }
+.bh-view-active {
+  background: var(--primary, #001155);
+  color: #fff;
+}
+
+.bh-quick-ranges {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.bh-quick-btn {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.bh-quick-btn:hover { background: #f3f4f6; }
+
+.bh-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+.bh-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+.bh-date-input,
+.bh-select {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  background: #fff;
+}
+
+/* Error / loading / empty */
+.bh-error { color: #c62828; font-size: 0.85rem; }
+.bh-loading { color: #6b7280; font-style: italic; font-size: 0.85rem; }
+.bh-empty { color: #9ca3af; font-style: italic; font-size: 0.85rem; padding: 1rem 0; }
+
+/* Day view */
+.bh-day-view { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.bh-day-group {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bh-day-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: none;
+  background: #f9fafb;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.bh-day-header:hover { background: #f3f4f6; }
+.bh-day-arrow { font-size: 0.75rem; color: #9ca3af; width: 14px; }
+.bh-day-date { flex: 1; }
+.bh-day-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: #e5e7eb;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+}
+.bh-day-total {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary, #001155);
+}
+
+/* Tables */
+.bh-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.bh-table th {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.bh-table td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+.bh-table tbody tr:hover { background: #f9fafb; }
+
+.bh-cell-name { font-weight: 500; }
+.bh-cell-team { font-size: 0.78rem; color: #6b7280; }
+.bh-cell-dur { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.bh-ongoing {
+  font-style: italic;
+  color: #e65100;
+  font-size: 0.78rem;
+}
+
+/* Summary (week view) */
+.bh-summary-row { cursor: pointer; }
+.bh-summary-row:hover { background: #eef2ff !important; }
+
+.bh-detail-row td { padding: 0 !important; background: #f9fafb; }
+.bh-inner-table { margin: 0; }
+.bh-inner-table th { background: #f3f4f6; }
+
+/* ── Daily limit warning ── */
+.bh-row-overlimit {
+  background-color: #fefce8 !important; /* light yellow */
+}
+.bh-row-overlimit:hover {
+  background-color: #fef9c3 !important; /* slightly deeper on hover */
+}
+
+.bh-warn-icon {
+  display: inline-block;
+  font-size: 0.78rem;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+  cursor: help;
+  line-height: 1;
+}
+
+.bh-day-group-warn {
+  border-color: #fbbf24; /* amber border for day groups with warnings */
+}
+
+.bh-day-total-warn {
+  color: #b45309 !important; /* amber-700 */
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bh-controls { flex-direction: column; align-items: stretch; }
+  .bh-filters { flex-direction: column; }
+  .bh-table { font-size: 0.75rem; }
+  .bh-table th, .bh-table td { padding: 0.35rem 0.4rem; }
+}

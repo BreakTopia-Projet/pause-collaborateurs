@@ -1,0 +1,119 @@
+/* ── InfoTooltip ── */
+
+.info-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+/* Trigger button — looks like a plain icon, fully focusable */
+.info-tooltip-trigger {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--swisscom-blue, #001155);
+  opacity: 0.4;
+  transition: opacity 150ms ease;
+  border-radius: 50%;
+  padding: 1px;
+}
+
+.info-tooltip-trigger:hover,
+.info-tooltip-trigger:focus-visible {
+  opacity: 0.75;
+}
+
+.info-tooltip-trigger:focus-visible {
+  outline: 2px solid var(--swisscom-blue, #001155);
+  outline-offset: 2px;
+}
+
+.info-tooltip-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Tooltip bubble */
+.info-tooltip-bubble {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  max-width: 260px;
+  width: max-content;
+  padding: 0.55rem 0.75rem;
+
+  background: var(--bg-primary, #fff);
+  color: var(--text-primary, #1a1a2e);
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: normal;
+
+  /* Fade-in */
+  animation: tooltipFadeIn 150ms ease;
+  pointer-events: none;
+}
+
+/* Small arrow pointing up */
+.info-tooltip-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: var(--border, #e0e0e0);
+}
+
+.info-tooltip-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: var(--bg-primary, #fff);
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(2px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Responsive: keep tooltip inside viewport ── */
+@media (max-width: 767px) {
+  .info-tooltip-bubble {
+    left: auto;
+    right: -8px;
+    transform: none;
+    max-width: 220px;
+    animation-name: tooltipFadeInMobile;
+  }
+
+  .info-tooltip-bubble::before,
+  .info-tooltip-bubble::after {
+    left: auto;
+    right: 12px;
+    transform: none;
+  }
+
+  @keyframes tooltipFadeInMobile {
+    from { opacity: 0; transform: translateY(2px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

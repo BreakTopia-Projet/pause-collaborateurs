@@ -1,0 +1,131 @@
+/* ═══════════════════════════════════════════
+   TeamDashboard — Unified dashboard component
+   ═══════════════════════════════════════════ */
+
+.td-section {
+  /* No extra wrapper styling — inherits parent layout */
+}
+
+/* ── Header (title + last sync) ── */
+.td-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.td-title {
+  margin: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.td-last-sync {
+  font-style: italic;
+  font-size: 0.75rem;
+  color: #6b7280;
+  white-space: nowrap;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* ── Online hint ── */
+.td-online-hint {
+  margin: 0 0 0.65rem;
+  font-size: 0.74rem;
+  color: var(--text-secondary, #6b7280);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ── Toggle bar ── */
+.td-toggle-bar {
+  margin-bottom: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.td-toggle-bar label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.td-toggle-bar input[type="checkbox"] {
+  accent-color: var(--swisscom-blue, #001155);
+}
+
+/* ── KPI bar ── */
+.td-kpi-bar {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.td-kpi {
+  flex: 1;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.td-kpi-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.td-kpi-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: center;
+}
+
+.td-kpi-working .td-kpi-value {
+  color: #2e7d32;
+}
+
+.td-kpi-break .td-kpi-value {
+  color: #e65100;
+}
+
+.td-kpi-capacity .td-kpi-value {
+  color: var(--text-primary);
+}
+
+.td-kpi-capacity-full .td-kpi-value {
+  color: #c62828;
+}
+
+.td-kpi-capacity-full {
+  border-color: #e57373;
+  background: #ffebee;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .td-kpi-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+  .td-kpi { padding: 0.45rem 0.6rem; }
+  .td-kpi-value { font-size: 1.15rem; }
+  .td-kpi-label { font-size: 0.6rem; }
+}

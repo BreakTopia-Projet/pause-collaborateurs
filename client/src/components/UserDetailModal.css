@@ -1,0 +1,263 @@
+/* ── UserDetailModal ── */
+
+.ud-overlay {
+  z-index: 1200;
+}
+
+.ud-panel {
+  background: var(--bg-primary, #fff);
+  border-radius: var(--radius, 8px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+  max-width: 640px;
+  width: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.ud-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border, #e0e0e0);
+  position: relative;
+}
+
+.ud-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary, #666);
+  line-height: 1;
+  padding: 0.25rem;
+}
+.ud-close:hover {
+  color: var(--text-primary, #333);
+}
+
+.ud-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.ud-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--swisscom-blue, #001155);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.ud-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ud-email {
+  font-size: 0.82rem;
+  color: var(--text-secondary, #666);
+}
+
+.ud-meta {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.ud-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.82rem;
+}
+
+.ud-meta-label {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary, #888);
+  font-weight: 500;
+}
+
+/* Status badges */
+.ud-status-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.ud-status-working {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.ud-status-break {
+  background: #fff8e1;
+  color: #f57f17;
+}
+.ud-status-extended {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+/* ── Tabs ── */
+.ud-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border, #e0e0e0);
+  padding: 0 1.5rem;
+}
+
+.ud-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-secondary, #666);
+  transition: border-color 0.15s, color 0.15s;
+}
+.ud-tab:hover {
+  color: var(--text-primary, #333);
+}
+.ud-tab-active {
+  border-bottom-color: var(--swisscom-blue, #001155);
+  color: var(--swisscom-blue, #001155);
+  font-weight: 600;
+}
+
+/* ── Body ── */
+.ud-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+}
+
+/* ── Activity tab ── */
+.ud-section-title {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary, #888);
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+
+.ud-day-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+}
+.ud-day-table th,
+.ud-day-table td {
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border, #eee);
+}
+.ud-day-table th {
+  color: var(--text-secondary, #888);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+.ud-has-data {
+  font-weight: 600;
+  color: var(--text-primary, #333);
+}
+.ud-week-col {
+  border-left: 2px solid var(--border, #ddd);
+  font-weight: 700;
+}
+.ud-week-val {
+  color: var(--swisscom-blue, #001155);
+}
+
+.ud-current-break {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  background: #fff8e1;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius, 6px);
+  margin-bottom: 1rem;
+}
+.ud-current-break-label {
+  color: var(--text-secondary, #888);
+  font-weight: 500;
+}
+
+/* ── Admin tab ── */
+.ud-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ud-section {
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: var(--radius, 6px);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.ud-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.ud-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.ud-form input[type="text"],
+.ud-form input[type="email"] {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--border, #ddd);
+  border-radius: var(--radius, 6px);
+  font-size: 0.85rem;
+}
+
+.ud-role-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ud-error {
+  margin-bottom: 0.75rem;
+}
+.ud-success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius, 6px);
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Danger zone ── */
+.ud-danger-zone {
+  border-color: #ffcdd2;
+  background: #fff5f5;
+}
+.ud-danger-title {
+  color: #c62828 !important;
+}

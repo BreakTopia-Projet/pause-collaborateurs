@@ -1,0 +1,85 @@
+/* ── Super-Admin specific styles ── */
+
+.sa-main {
+  max-width: 1100px;
+}
+
+/* ── Accordion ── */
+.sa-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sa-team-group {
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: var(--radius, 8px);
+  overflow: hidden;
+}
+
+.sa-team-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  background: var(--bg-secondary, #f5f5f5);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.85rem;
+  transition: background 0.1s;
+}
+.sa-team-header:hover { background: #eee; }
+
+.sa-team-arrow {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #888);
+  flex-shrink: 0;
+  width: 1rem;
+  text-align: center;
+}
+
+.sa-team-name {
+  font-weight: 600;
+  color: var(--text-primary, #333);
+  font-size: 0.9rem;
+}
+
+.sa-team-kpis {
+  margin-left: auto;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sa-team-kpi {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #888);
+  font-weight: 500;
+}
+.sa-team-kpi-working { color: #2e7d32; }
+.sa-team-kpi-break { color: #e65100; }
+
+/* Inner table inside accordion */
+.sa-inner-table {
+  border-top: 1px solid var(--border, #eee);
+}
+
+/* ── Per-team dashboard blocks (SuperAdmin Dashboard tab) ── */
+.sa-team-dashboard-block {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: var(--radius, 8px);
+}
+
+.sa-team-dashboard-title {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary, #333);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--swisscom-blue, #001155);
+}

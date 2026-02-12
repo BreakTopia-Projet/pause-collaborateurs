@@ -1,0 +1,185 @@
+.dashboard {
+  min-height: 100vh;
+  background: var(--bg-secondary);
+}
+
+/* ── Header ── */
+.dashboard-header {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-subtitle {
+  margin: 0.15rem 0 0 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.status-live {
+  background: #e8f5e9;
+  color: var(--status-working);
+}
+
+.status-offline {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.user-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+/* ── Main content ── */
+.dashboard-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ── Primary section: My Status ── */
+.my-status-section h2 {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* KPI styles are now in TeamDashboard.css (shared component) */
+
+/* ── Capacity error ── */
+.capacity-error {
+  margin-top: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  background: #fff3e0;
+  border: 1px solid #ffb74d;
+  border-radius: var(--radius);
+  color: #e65100;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* ── Capacity full banner (inline under "Mon statut") ── */
+.capacity-banner {
+  margin-top: 0.6rem;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(135deg, #fff8e1, #fff3e0);
+  border: 1px solid #ffcc80;
+  border-left: 4px solid #e68a00;
+  border-radius: var(--radius);
+  color: #bf360c;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bannerSlideIn 0.3s ease-out;
+}
+
+.capacity-banner-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+@keyframes bannerSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Buttons (shared) ── */
+.btn {
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-primary {
+  background: var(--swisscom-blue);
+  color: var(--text-on-blue);
+  border-color: var(--swisscom-blue);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--swisscom-blue-hover);
+  border-color: var(--swisscom-blue-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--bg-primary);
+  color: var(--swisscom-blue);
+  border-color: var(--border);
+  font-size: 0.8rem;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--swisscom-blue-light);
+}
+
+/* ══ Dashboard responsive ══ */
+@media (max-width: 1023px) {
+  .dashboard-main { padding: 1rem; }
+  .header-inner { gap: 0.6rem; }
+}
+
+@media (max-width: 767px) {
+  .dashboard-header { padding: 0.6rem 0.85rem; }
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .header-user {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.4rem;
+  }
+  .dashboard-main {
+    padding: 0.75rem;
+    gap: 1.25rem;
+  }
+}

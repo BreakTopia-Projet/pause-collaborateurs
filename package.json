@@ -1,0 +1,27 @@
+{
+  "name": "pause-collaborateurs",
+  "version": "1.0.0",
+  "description": "Visualisation et gestion des pauses collaborateurs - Swisscom B2B",
+  "type": "module",
+  "scripts": {
+    "server": "node server/index.js",
+    "dev:server": "node --watch server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run dev:server\" \"npm run client\"",
+    "build": "npm run build --prefix client",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^8.0.1",
+    "pdfkit": "^0.17.2",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

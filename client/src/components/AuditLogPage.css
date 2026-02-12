@@ -1,0 +1,146 @@
+/* Audit standalone page accent */
+.audit-page .dashboard-header {
+  border-bottom: 3px solid #1565c0;
+}
+
+/* ── Inline audit panel (embedded in tabs) ── */
+.audit-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.audit-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.audit-filter-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.audit-filter-select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.84rem;
+  min-width: 140px;
+}
+
+.audit-filter-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.audit-filter-input {
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.84rem;
+  min-width: 180px;
+}
+.audit-filter-input:focus {
+  outline: none;
+  border-color: var(--swisscom-blue);
+  box-shadow: 0 0 0 2px rgba(0, 17, 85, 0.15);
+}
+
+/* ── Legacy standalone audit toolbar (for /audit route) ── */
+.audit-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.audit-toolbar select { min-width: 160px; }
+
+.audit-search-form { display: flex; align-items: flex-end; }
+.audit-search-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+.audit-search-row { display: flex; gap: 0.35rem; }
+.audit-search-row input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 200px;
+}
+.audit-search-row input:focus {
+  outline: none;
+  border-color: var(--swisscom-blue);
+  box-shadow: 0 0 0 2px rgba(0, 17, 85, 0.15);
+}
+
+/* Action badges */
+.audit-action-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.audit-action-USER_DELETE { background: #ffebee; color: #c62828; }
+.audit-action-ROLE_CHANGE { background: #fff3e0; color: #e65100; }
+.audit-action-COUNTER_RESET { background: #e3f2fd; color: #1565c0; }
+.audit-action-TEAM_CHANGE { background: #e8f5e9; color: #2e7d32; }
+
+.audit-date-cell {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.audit-details-cell {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.audit-table-inline td { vertical-align: middle; }
+
+/* Legacy standalone table */
+.admin-table-wrap { overflow-x: auto; }
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.admin-table th,
+.admin-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.admin-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.admin-toolbar label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+.admin-toolbar select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 200px;
+}

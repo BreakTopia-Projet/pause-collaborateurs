@@ -1,0 +1,127 @@
+/* ── My Status Card ── */
+.my-status-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Status indicator group */
+.my-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.my-status-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.my-status-dot-working {
+  background: var(--status-working);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+.my-status-dot-break {
+  background: var(--status-break);
+  box-shadow: 0 0 0 3px rgba(249, 168, 37, 0.2);
+  animation: pulse-break 2s infinite;
+}
+
+.my-status-dot-extended {
+  background: var(--status-extended);
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+  animation: pulse-extended 1.5s infinite;
+}
+
+@keyframes pulse-break {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(249, 168, 37, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(249, 168, 37, 0.1); }
+}
+
+@keyframes pulse-extended {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(198, 40, 40, 0.1); }
+}
+
+.my-status-label {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.my-status-timer {
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  margin-left: 0.25rem;
+}
+
+.my-status-working .my-status-label {
+  color: var(--status-working);
+}
+
+.my-status-break .my-status-label {
+  color: #e68a00;
+}
+
+.my-status-extended .my-status-label {
+  color: var(--status-extended);
+}
+
+/* Single action button */
+.my-status-action {
+  flex-shrink: 0;
+}
+
+.btn-status-action {
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+
+.btn-status-action:active {
+  transform: scale(0.97);
+}
+
+.btn-start-break {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffcc80;
+}
+
+.btn-start-break:hover:not(:disabled) {
+  background: #ffe0b2;
+}
+
+.btn-start-break:disabled,
+.btn-start-break.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-resume-work {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.btn-resume-work:hover {
+  background: #c8e6c9;
+}
