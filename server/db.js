@@ -150,16 +150,7 @@ db.exec(`
     console.log('[DB] Migrated status table: added offline to CHECK constraint');
   }
 }
-// ── Server startup: set all users offline + close any dangling break sessions ──
-// On server restart, no users are connected — they'll come back online via ping.
-// IMPORTANT: Use JS ISO string (with 'Z') instead of SQLite datetime('now') (no 'Z')
-// to avoid timezone mismatch when JS later parses these dates.
-{
-  const nowISO = new Date().toISOString();
-  db.prepare("UPDATE break_logs SET ended_at = ? WHERE ended_at IS NULL").run(nowISO);
-  db.prepare("UPDATE status SET status = 'offline', status_changed_at = ?, updated_at = ? WHERE status != 'offline'").run(nowISO, nowISO);
-}
-
+// ── Create break_logs table BEFORE any query that references it ──
 db.exec(`
   CREATE TABLE IF NOT EXISTS break_logs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -170,6 +161,17 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_break_logs_user_started ON break_logs(user_id, started_at);
   CREATE INDEX IF NOT EXISTS idx_break_logs_started ON break_logs(started_at);
 `);
+console.log('[DB] break_logs table ensured');
+
+// ── Server startup: set all users offline + close any dangling break sessions ──
+// On server restart, no users are connected — they'll come back online via ping.
+// IMPORTANT: Use JS ISO string (with 'Z') instead of SQLite datetime('now') (no 'Z')
+// to avoid timezone mismatch when JS later parses these dates.
+{
+  const nowISO = new Date().toISOString();
+  db.prepare("UPDATE break_logs SET ended_at = ? WHERE ended_at IS NULL").run(nowISO);
+  db.prepare("UPDATE status SET status = 'offline', status_changed_at = ?, updated_at = ? WHERE status != 'offline'").run(nowISO, nowISO);
+}
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS audit_logs (
