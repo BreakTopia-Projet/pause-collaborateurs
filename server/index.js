@@ -183,6 +183,29 @@ app.get('/__debug/version', debugAuth, (req, res) => {
   res.json({ commit: 'unknown', buildTime: BUILD_TIME });
 });
 
+// ── Explicit root route (debug marker) ──
+app.get('/', (req, res) => {
+  const indexPath = join(clientDist, 'index.html');
+  const distExistsNow = fs.existsSync(clientDist);
+  const indexExistsNow = fs.existsSync(indexPath);
+
+  // Marqueur prouvant que CE code tourne
+  res.setHeader('X-Deploy-Marker', 'ROOT_ROUTE_ACTIVE_2026_02_13');
+
+  if (!distExistsNow || !indexExistsNow) {
+    return res.status(500).send(
+      `[ROOT] distExists=${distExistsNow} indexExists=${indexExistsNow} indexPath=${indexPath}`
+    );
+  }
+
+  return res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error('[ROOT] sendFile error', err);
+      res.status(500).send('[ROOT] sendFile error');
+    }
+  });
+});
+
 // ── Serve React/Vite frontend in production ──
 app.use(express.static(clientDist));
 app.get('*', (req, res) => {
