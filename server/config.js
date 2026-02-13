@@ -22,8 +22,8 @@ export const MAIL_FROM = process.env.MAIL_FROM || 'Breaktopia <contact@breaktopi
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 /**
+ * TEMP DEBUG - remove after go-live
  * Token d'accès aux endpoints de diagnostic (/__debug/*).
- * À définir via la variable d'environnement DEBUG_TOKEN ou directement ici.
- * Si vide, les endpoints de debug sont désactivés (renvoient 404).
+ * Si vide, les endpoints renvoient 404.
  */
-export const DEBUG_TOKEN = process.env.DEBUG_TOKEN || '';
+export const DEBUG_TOKEN = 'CHANGE_ME_DEBUG_TOKEN_2026';
