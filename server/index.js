@@ -65,7 +65,10 @@ app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // ── Public config routes (MUST be declared BEFORE capacityRoutes which uses authMiddleware) ──
 
-app.get('/api/health', (req, res) => res.json({ ok: true }));
+app.get('/api/health', (req, res) => {
+  res.setHeader('X-Deploy-Marker', 'HEALTH_MARKER_2026_02_13');
+  res.json({ ok: true });
+});
 
 // Dynamic config — reads pauseProlongeeMinutes from DB (app_settings)
 app.get('/api/config', (req, res) => {
